@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -7,18 +8,18 @@ room = {
                      "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+                passages run north and east."""),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
-into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+                into the darkness. Ahead to the north, a light flickers in
+                the distance, but there is no way across the chasm."""),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+                to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
-chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+                chamber! Sadly, it has already been completely emptied by
+                earlier adventurers. The only exit is to the south."""),
 }
 
 
@@ -38,6 +39,29 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+
+player = Player("name", room['outside'])
+
+playerName = getattr(player, "name")
+
+playerName = input("Enter your Name: ") 
+
+location = room['outside']
+
+while True:
+    print(f"Hi {playerName} You are in {location}") 
+    action = input("Enter where to next: ")
+    if action == "n":
+        location = location.n_to
+    if action == "s":
+        location = location.s_to
+    if action == "w":
+        location = location.w_to
+    if action == "e":
+        location = location.e_to
+    elif action == "q":
+        print("Finished")
+        break
 
 # Write a loop that:
 #
